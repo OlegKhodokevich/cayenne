@@ -89,7 +89,7 @@ class DbAttributeMerger extends AbstractMerger<DbEntity, DbAttribute> {
      */
     @Override
     Collection<MergerToken> createTokensForMissingOriginal(DbAttribute imported) {
-        DbEntity originalDbEntity = getOriginalDictionary().getByName(imported.getEntity().getName().toUpperCase());
+        DbEntity originalDbEntity = getOriginalDictionary().getByName(imported.getEntity().getName());
         return Collections.singleton(getTokenFactory().createDropColumnToDb(originalDbEntity, imported));
     }
 

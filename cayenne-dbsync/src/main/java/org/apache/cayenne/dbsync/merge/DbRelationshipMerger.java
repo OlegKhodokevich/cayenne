@@ -55,11 +55,11 @@ public class DbRelationshipMerger extends AbstractMerger<DbEntity, DbRelationshi
     }
 
     private DbEntity getOriginalSourceDbEntity(DbRelationship relationship) {
-        return getOriginalDictionary().getByName(relationship.getSourceEntity().getName().toUpperCase());
+        return getOriginalDictionary().getByName(relationship.getSourceEntity().getName());
     }
 
     private DbEntity getOriginalTargetDbEntity(DbRelationship relationship) {
-        return getOriginalDictionary().getByName(relationship.getTargetEntityName().toUpperCase());
+        return getOriginalDictionary().getByName(relationship.getTargetEntityName());
     }
 
     /**

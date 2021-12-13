@@ -32,7 +32,7 @@ abstract class MergerDictionary<T> {
 
     void init() {
         for(T entity : getAll()) {
-            String name = getName(entity).toUpperCase();
+            String name = getName(entity);
             dictionary.put(name, entity);
         }
     }
