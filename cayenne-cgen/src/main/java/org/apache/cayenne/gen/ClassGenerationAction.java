@@ -81,9 +81,9 @@ public class ClassGenerationAction {
 	/**
 	Optionally allows user-defined tools besides {@link ImportUtils} for working with velocity templates.<br/>
 	To use this feature, either set the java system property {@code -Dorg.apache.velocity.tools=tools.properties}
-	or set the {@code externalToolConfig} property to "tools.properties" in {@code CgenConfiguration}. Then 
-	create the file "tools.properties" in the working directory or in the root of the classpath with content 
-	like this: 
+	or set the {@code externalToolConfig} property to "tools.properties" in {@code CgenConfiguration}. Then
+	create the file "tools.properties" in the working directory or in the root of the classpath with content
+	like this:
 	<pre>
 	tools.toolbox = application
 	tools.application.myTool = com.mycompany.MyTool</pre>
@@ -92,7 +92,7 @@ public class ClassGenerationAction {
 	public ClassGenerationAction(CgenConfiguration cgenConfig) {
 		this.cgenConfiguration = cgenConfig;
 		String toolConfigFile = cgenConfig.getExternalToolConfig();
-		
+
 		if (System.getProperty("org.apache.velocity.tools") != null || toolConfigFile != null) {
 			ToolManager manager = new ToolManager(true, true);
 			if (toolConfigFile != null) {
@@ -365,15 +365,22 @@ public class ClassGenerationAction {
 	 */
 	protected Writer openWriter(TemplateType templateType) throws Exception {
 
-		File outFile = (templateType.isSuperclass()) ? fileForSuperclass() : fileForClass();
-		if (outFile == null) {
-			return null;
-		}
+        boolean isSuperclass = templateType.isSuperclass();
+        File outFile = (isSuperclass) ? fileForSuperclass() : fileForClass();
+        if (outFile == null) {
+            return null;
+        }
 
-		if (logger != null) {
-			String label = templateType.isSuperclass() ? "superclass" : "class";
-			logger.info("Generating " + label + " file: " + outFile.getCanonicalPath());
-		}
+        if (isSuperclass && outFile.exists() && fileNeedUpdate(outFile, cgenConfiguration.getSuperTemplate())) {
+            if (!outFile.delete()) {
+                logger.warn("File " + outFile.getAbsolutePath() + " can't be deleted.");
+            }
+        }
+
+        if (logger != null) {
+            String label = isSuperclass ? "superclass" : "class";
+            logger.info("Generating " + label + " file: " + outFile.getCanonicalPath());
+        }
 
 		// return writer with specified encoding
 		FileOutputStream out = new FileOutputStream(outFile);

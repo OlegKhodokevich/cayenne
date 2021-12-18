@@ -24,15 +24,15 @@
           project-version="10">
 
     <db-entity name="CHILD" schema="SCHEMA_01">
+        <db-attribute name="COL1" type="DOUBLE" length="52"/>
+        <db-attribute name="COL2" type="CHAR" length="25"/>
         <db-attribute name="COL3" type="DECIMAL" length="5" scale="1"/>
         <db-attribute name="COL4" type="VARCHAR" length="25"/>
         <db-attribute name="COL5" type="DATE" length="10"/>
         <db-attribute name="ID" type="INTEGER" isPrimaryKey="true" isMandatory="true" length="10"/>
-        <db-attribute name="col1" type="DOUBLE" length="52"/>
-        <db-attribute name="col2" type="CHAR" length="25"/>
-        <db-attribute name="parent_id" type="INTEGER" length="10"/>
+        <db-attribute name="PARENT_ID" type="INTEGER" length="10"/>
     </db-entity>
-    <db-entity name="parent" schema="SCHEMA_01">
+    <db-entity name="PARENT" schema="SCHEMA_01">
         <db-attribute name="COL2" type="CHAR" length="20"/>
         <db-attribute name="COL3" type="DECIMAL" length="10" scale="2"/>
         <db-attribute name="COL4" type="VARCHAR" length="50"/>
@@ -40,22 +40,24 @@
         <db-attribute name="ID" type="INTEGER" isPrimaryKey="true" isMandatory="true" length="10"/>
     </db-entity>
     <obj-entity name="Child" className="Child" dbEntityName="CHILD">
+		<obj-attribute name="col1" type="double" db-attribute-path="COL1"/>
+		<obj-attribute name="col2" type="java.lang.String" db-attribute-path="COL2"/>
         <obj-attribute name="col3" type="java.math.BigDecimal" db-attribute-path="COL3"/>
         <obj-attribute name="col4" type="java.lang.String" db-attribute-path="COL4"/>
         <obj-attribute name="col5" type="java.util.Date" db-attribute-path="COL5"/>
         <obj-attribute name="parentId" type="java.lang.String" db-attribute-path="PARENT_ID"/>
     </obj-entity>
-    <obj-entity name="Parent" className="Parent" dbEntityName="parent">
+    <obj-entity name="Parent" className="Parent" dbEntityName="PARENT">
         <obj-attribute name="col2" type="java.lang.String" db-attribute-path="COL2"/>
         <obj-attribute name="col3" type="java.math.BigDecimal" db-attribute-path="COL3"/>
         <obj-attribute name="col4" type="java.lang.String" db-attribute-path="COL4"/>
-        <obj-attribute name="col5" type="java.util.Date" db-attribute-path="COL5"/>
+        <obj-attribute name="col5" type="java.time.LocalTime" db-attribute-path="COL5"/>
     </obj-entity>
-    <db-relationship name="parent" source="CHILD" target="parent">
+    <db-relationship name="parent" source="CHILD" target="PARENT">
         <db-attribute-pair source="parent_id" target="ID"/>
     </db-relationship>
-    <db-relationship name="children" source="parent" target="CHILD" toMany="true">
-        <db-attribute-pair source="ID" target="parent_id"/>
+    <db-relationship name="children" source="PARENT" target="CHILD" toMany="true">
+        <db-attribute-pair source="ID" target="PARENT_ID"/>
     </db-relationship>
     <obj-relationship name="parent" source="Child" target="Parent" deleteRule="Nullify" db-relationship-path="parent"/>
     <obj-relationship name="children" source="Parent" target="Child" deleteRule="Deny" db-relationship-path="children"/>

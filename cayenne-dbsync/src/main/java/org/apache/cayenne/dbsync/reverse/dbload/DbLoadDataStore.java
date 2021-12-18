@@ -43,7 +43,7 @@ public class DbLoadDataStore extends DataMap {
 
     private Map<String, Set<ExportedKey>> exportedKeys = new HashMap<>();
 
-    private Map<String, DbEntity> upperCaseNames = new HashMap<>();
+    private Map<String, DbEntity> names = new HashMap<>();
 
     DbLoadDataStore() {
         super("__generated_by_dbloader__");
@@ -51,7 +51,7 @@ public class DbLoadDataStore extends DataMap {
 
     @Override
     public DbEntity getDbEntity(String dbEntityName) {
-        return upperCaseNames.get(dbEntityName.toUpperCase());
+        return names.get(dbEntityName);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class DbLoadDataStore extends DataMap {
             throw new IllegalArgumentException("Only DetectedDbEntity can be inserted in this map");
         }
         super.addDbEntity(entity);
-        upperCaseNames.put(entity.getName().toUpperCase(), entity);
+        names.put(entity.getName(), entity);
     }
 
     DbEntity addDbEntitySafe(DbEntity entity) {

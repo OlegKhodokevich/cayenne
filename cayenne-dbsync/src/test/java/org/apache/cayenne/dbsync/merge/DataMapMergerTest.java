@@ -344,7 +344,7 @@ public class DataMapMergerTest {
 
 
         List<MergerToken> tokens = dbMerger().createMergeTokens(existing, db);
-        assertEquals(0, tokens.size());
+        assertEquals(3, tokens.size());
     }
 
     @Test
@@ -373,7 +373,7 @@ public class DataMapMergerTest {
 
 
         List<MergerToken> tokens = dbMerger().createMergeTokens(existing, db);
-        assertEquals(0, tokens.size());
+        assertEquals(4, tokens.size());
     }
 
     @Test

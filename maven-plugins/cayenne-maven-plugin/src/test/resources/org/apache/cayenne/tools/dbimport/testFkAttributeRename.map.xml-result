@@ -24,13 +24,15 @@
           project-version="10">
 
     <db-entity name="CHILD" schema="SCHEMA_01">
-        <db-attribute name="PAR" type="INTEGER" length="10"/>
-        <db-attribute name="id" type="INTEGER" length="10"/>
+		<db-attribute name="ID" type="INTEGER" length="10"/>
+		<db-attribute name="PAR" type="INTEGER" length="10"/>
     </db-entity>
     <db-entity name="PARENT" schema="SCHEMA_01">
-        <db-attribute name="id" type="INTEGER" isPrimaryKey="true" isMandatory="true" length="10"/>
+		<db-attribute name="ID" type="INTEGER" isPrimaryKey="true" isMandatory="true" length="10"/>
     </db-entity>
     <obj-entity name="Child" className="Child" dbEntityName="CHILD">
+		<obj-attribute name="id" type="int" db-attribute-path="ID"/>
+		<obj-attribute name="par" type="int" db-attribute-path="PAR"/>
     </obj-entity>
     <obj-entity name="Parent" className="Parent" dbEntityName="PARENT">
     </obj-entity>
