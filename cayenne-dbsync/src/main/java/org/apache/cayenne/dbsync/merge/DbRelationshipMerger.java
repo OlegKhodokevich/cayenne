@@ -121,13 +121,13 @@ public class DbRelationshipMerger extends AbstractMerger<DbEntity, DbRelationshi
      * case insensitive search for a {@link DbAttribute} in a {@link DbEntity}
      * by name
      */
-    private DbAttribute findDbAttribute(DbEntity entity, String caseInsensitiveName) {
+    private DbAttribute findDbAttribute(DbEntity entity, String name) {
         if (entity == null) {
             return null;
         }
 
         for (DbAttribute a : entity.getAttributes()) {
-            if (a.getName().equalsIgnoreCase(caseInsensitiveName)) {
+            if (a.getName().equals(name)) {
                 return a;
             }
         }

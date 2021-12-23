@@ -31,7 +31,6 @@
 		<db-attribute name="NAME" type="VARCHAR" length="255"/>
     </db-entity>
     <obj-entity name="Child" className="Child" dbEntityName="CHILD">
-		<obj-attribute name="parentId" type="int" db-attribute-path="PARENT_ID"/>
     </obj-entity>
     <obj-entity name="Parent" className="Parent" dbEntityName="PARENT">
         <obj-attribute name="name" type="java.lang.String" db-attribute-path="NAME"/>
@@ -39,10 +38,10 @@
     <obj-entity name="ParentSub" superEntityName="Parent" className="ParentSub">
     </obj-entity>
     <db-relationship name="parent" source="CHILD" target="PARENT">
-        <db-attribute-pair source="parent_id" target="id"/>
+        <db-attribute-pair source="PARENT_ID" target="ID"/>
     </db-relationship>
     <db-relationship name="children" source="PARENT" target="CHILD" toMany="true">
-        <db-attribute-pair source="id" target="parent_id"/>
+        <db-attribute-pair source="ID" target="PARENT_ID"/>
     </db-relationship>
     <obj-relationship name="parent" source="Child" target="Parent" deleteRule="Nullify" db-relationship-path="parent"/>
     <obj-relationship name="parent1" source="Child" target="ParentSub" deleteRule="Nullify" db-relationship-path="parent"/>

@@ -38,17 +38,16 @@
         <obj-attribute name="addrstr" type="java.lang.String" db-attribute-path="ADDRSTR"/>
     </obj-entity>
 	<obj-entity name="Child" className="Child" dbEntityName="CHILD">
-		<obj-attribute name="addressId" type="int" db-attribute-path="ADDRESS_ID"/>
 		<obj-attribute name="id" type="int" db-attribute-path="ID"/>
 		<obj-attribute name="name" type="java.lang.String"/>
 		<obj-attribute name="name1" type="java.lang.String" db-attribute-path="NAME"/>
 		<obj-attribute name="parentId" type="int" db-attribute-path="PARENT_ID"/>
     </obj-entity>
     <db-relationship name="children" source="ADDRESS" target="CHILD" toMany="true">
-        <db-attribute-pair source="id" target="ADDRESS_ID"/>
+        <db-attribute-pair source="ID" target="ADDRESS_ID"/>
     </db-relationship>
     <db-relationship name="address" source="CHILD" target="ADDRESS">
-        <db-attribute-pair source="ADDRESS_ID" target="id"/>
+        <db-attribute-pair source="ADDRESS_ID" target="ID"/>
     </db-relationship>
     <obj-relationship name="children" source="Address" target="Child" deleteRule="Deny" db-relationship-path="children"/>
     <obj-relationship name="address" source="Child" target="Address" deleteRule="Nullify" db-relationship-path="address"/>

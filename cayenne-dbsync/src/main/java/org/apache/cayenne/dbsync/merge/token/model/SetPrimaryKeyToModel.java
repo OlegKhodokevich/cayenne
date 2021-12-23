@@ -47,7 +47,7 @@ public class SetPrimaryKeyToModel extends AbstractToModelToken.Entity {
         this.detectedPrimaryKeyName = detectedPrimaryKeyName;
         
         for (DbAttribute attr : primaryKeyNew) {
-            primaryKeyNewAttributeNames.add(attr.getName().toUpperCase());
+            primaryKeyNewAttributeNames.add(attr.getName());
         }
     }
 
@@ -68,8 +68,7 @@ public class SetPrimaryKeyToModel extends AbstractToModelToken.Entity {
 
             boolean wasPrimaryKey = attr.isPrimaryKey();
             boolean willBePrimaryKey = primaryKeyNewAttributeNames.contains(attr
-                    .getName()
-                    .toUpperCase());
+                    .getName());
 
             if (wasPrimaryKey != willBePrimaryKey) {
                 attr.setPrimaryKey(willBePrimaryKey);

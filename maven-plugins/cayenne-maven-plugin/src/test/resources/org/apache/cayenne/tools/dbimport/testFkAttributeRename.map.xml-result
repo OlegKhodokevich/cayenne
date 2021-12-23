@@ -32,15 +32,14 @@
     </db-entity>
     <obj-entity name="Child" className="Child" dbEntityName="CHILD">
 		<obj-attribute name="id" type="int" db-attribute-path="ID"/>
-		<obj-attribute name="par" type="int" db-attribute-path="PAR"/>
     </obj-entity>
     <obj-entity name="Parent" className="Parent" dbEntityName="PARENT">
     </obj-entity>
     <db-relationship name="parent" source="CHILD" target="PARENT">
-        <db-attribute-pair source="PAR" target="id"/>
+        <db-attribute-pair source="PAR" target="ID"/>
     </db-relationship>
     <db-relationship name="children" source="PARENT" target="CHILD" toMany="true">
-        <db-attribute-pair source="id" target="PAR"/>
+        <db-attribute-pair source="ID" target="PAR"/>
     </db-relationship>
     <obj-relationship name="parent" source="Child" target="Parent" deleteRule="Nullify" db-relationship-path="parent"/>
     <obj-relationship name="children" source="Parent" target="Child" deleteRule="Deny" db-relationship-path="children"/>
