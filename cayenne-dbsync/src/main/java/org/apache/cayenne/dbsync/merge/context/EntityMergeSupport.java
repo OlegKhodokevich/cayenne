@@ -268,14 +268,23 @@ public class EntityMergeSupport {
             }
 
             if (dbRelationship.getTargetEntityName() != null) {
-                boolean needGeneratedEntity = createObjRelationship(entity, dbRelationship, nameGenerator.objEntityName(targetEntity));
+                boolean needGeneratedEntity = createObjRelationship(entity, dbRelationship, "unknown"); //boolean needGeneratedEntity = createObjRelationship(entity, dbRelationship, );
+
                 if (needGeneratedEntity) {
                     LOGGER.warn("Can't find ObjEntity for " + dbRelationship.getTargetEntityName());
                     LOGGER.warn("Db Relationship (" + dbRelationship + ") will have GUESSED Obj Relationship reflection. ");
                 }
             }
         } else {
+
             for (Entity mappedTarget : mappedObjEntities) {
+                ObjRelationship reverseObjRelationShip;
+                for (DbRelationship dbRel : targetEntity.getRelationships()) {
+                    if (dbRel.getTargetEntityName().equals(entity.getDbEntityName())) {
+                        reverseObjRelationShip = ((ObjEntity) mappedTarget).getRelationshipForDbRelationship(dbRel);
+                        reverseObjRelationShip.setTargetEntityName(entity.getName());
+                    }
+                }
                 createObjRelationship(entity, dbRelationship, mappedTarget.getName());
             }
         }
