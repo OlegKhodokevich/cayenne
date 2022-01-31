@@ -21,7 +21,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     name: JDK ${{ matrix.java }}, DB ${{ matrix.db-profile }}
-    continue-on-error: ${{ matrix.java == '16-ea' }}
+    continue-on-error: ${{ true }}
     strategy:
       matrix:
         java: [8, 11, 16-ea]
