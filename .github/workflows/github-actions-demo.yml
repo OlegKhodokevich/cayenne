@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         java: [8, 11, 16-ea]
-        db-profile: [hsql, h2, derby, mysql-docker, postgres-docker, sqlserver-docker]
+        db-profile: [hsql, h2, derby, mysql-tc, postgres-tc, sqlserver-tc]
 
     steps:
       - name: Checkout repository
